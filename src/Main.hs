@@ -7,13 +7,24 @@ import Data.Bifunctor (bimap)
 import Data.List.Extra
 import Data.Maybe
 import SimpleCmd
+import SimpleCmdArgs
 
 main :: IO ()
-main = do
+main =
+  simpleCmdArgs Nothing "unbundle"
+  "List bundled Fedora Haskell deps" $
+  run
+  <$> switchWith 's' "sort" "Order by number of dependents"
+  <*> optionalWith auto 'l' "limit" "NUM" "Dependent threshold" 1
+
+run :: Bool -> Int -> IO ()
+run order limit = do
   specs <- lines <$> shell "ls */*.spec"
   brSpecs <- sort <$> concatMapM specBRs specs
   let grps = map lump $ groupOnKey fst brSpecs
-  mapM_ printBundle $ filter (\(_,bs) -> length bs > 1 && any ((== "#BuildRequires:") . fst) bs) grps
+  mapM_ printBundle $
+    (if order then sortOn (length . snd) else id) $
+    filter (\(_,bs) -> length bs > limit && any ((== "#BuildRequires:") . fst) bs) grps
   where
     specBRs spec = do
       brs <- cmdLines "grep" ["-e", "BuildRequires:.*ghc-.*-devel", spec]
