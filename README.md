@@ -25,8 +25,9 @@ Available options:
 
 The '#' prefix is the current bundling package:
 
-```shellsession
-$ unbundling --sort
+`$ cd ~/fedora/haskell/hackage; unbundling --sort`
+
+```
 OneTuple #ghc-aeson ghc-hledger-lib
 character-ps #ghc-aeson ghc-attoparsec-aeson
 citeproc #ghc-pandoc pandoc-cli
@@ -51,16 +52,16 @@ yesod-test #hledger-web ghc-yesod-static
 bimap #ghc-brick ghc-copilot-theorem ghc-what4
 binary-orphans #ghc-criterion ghc-bytes ghc-hoauth2
 boring #ghc-dec ghc-constraints ghc-singleton-bool
+hslua-core #ghc-hslua ghc-hslua-module-text pandoc-cli
+hslua-marshalling #ghc-hslua ghc-hslua-module-text pandoc-cli
+hslua-packaging #ghc-hslua ghc-hslua-module-text pandoc-cli
 integer-conversion #ghc-attoparsec-iso8601 ghc-aeson ghc-attoparsec-aeson
 splitmix #ghc-random ghc-QuickCheck ghc-hledger-lib
 text-conversions #ghc-doctemplates ghc-fsnotify ghc-pandoc
 vty-crossplatform #ghc-brick hledger-ui tart
+doclayout #ghc-doctemplates ghc-hledger-lib ghc-pandoc hledger-ui pandoc-cli
 githash #ghc-optparse-simple hledger-ui hledger-web hledger stack
 sop-core #ghc-generics-sop ghc-servant-client-core ghc-servant-client ghc-servant-server ghc-servant
-doclayout #ghc-doctemplates ghc-hledger-lib ghc-pandoc hledger-ui pandoc-cli pandoc-cli
-hslua-packaging #ghc-hslua ghc-hslua-module-text pandoc-cli pandoc-cli pandoc-cli pandoc-cli
-hslua-marshalling #ghc-hslua ghc-hslua-module-text pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli
-hslua-core #ghc-hslua ghc-hslua-module-text pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli
 ```
 
 Use `--limit 0` to list all bundled deps:

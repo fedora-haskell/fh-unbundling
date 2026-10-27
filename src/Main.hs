@@ -3,7 +3,7 @@
 module Main (main) where
 
 import Control.Monad.Extra
-import Data.Bifunctor (bimap, second)
+import Data.Bifunctor (bimap)
 import Data.List.Extra
 import Data.Maybe
 import SimpleCmd
@@ -20,8 +20,8 @@ main =
 run :: Bool -> Int -> IO ()
 run order limit = do
   specs <- lines <$> shell "ls */*.spec"
-  brSpecs <- concatMapM specBRs specs
-  let grps = map (second sort) $ groupSort brSpecs
+  brSpecs <- nubSort <$> concatMapM specBRs specs
+  let grps = groupSort brSpecs
   mapM_ printBundle $
     (if order then sortOn (length . snd) else id) $
     filter (\(_,bs) -> length bs > limit && any ((== "#BuildRequires:") . fst) bs) grps
