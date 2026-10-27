@@ -17,51 +17,51 @@ Usage: unbundling [-s|--sort] [-l|--limit NUM]
 
 Available options:
   -h,--help                Show this help text
-  -s,--sort                Order by number of dependents
+  -s,--sort                Order by number of dependent chains
   -l,--limit NUM           Dependent threshold (default 1)
 ```
 
 ## Current results (October 2026)
 
-The '#' prefix is the current bundling package:
+The first dependent is the current bundling package.
 
 `$ cd ~/fedora/haskell/hackage; unbundling --sort`
 
 ```
-- OneTuple 2 #ghc-aeson ghc-hledger-lib
-- character-ps 2 #ghc-aeson ghc-attoparsec-aeson
-- citeproc 2 #ghc-pandoc pandoc-cli
-- easy-file 2 #ghc-fast-logger ghc-simple-sendfile
-- fedora-krb 2 #fbrnch cabal-rpm
-- file-io 2 #ghc-tar git-annex
-- filelock 2 #stack Agda
-- ghc-lib-parser 2 #ormolu hlint
-- hslua-typing 2 #ghc-hslua pandoc-cli
-- invariant 2 #ghc-kan-extensions Agda
-- libyaml 2 #ghc-yaml ghc-pandoc
-- lucid 2 #ghc-hledger-lib hledger
-- open-browser 2 #cabal-install stack
-- recv 2 #ghc-warp ghc-warp-tls
-- skylighting-core 2 #ghc-skylighting ghc-pandoc
-- text-iso8601 2 #ghc-aeson ghc-http-api-data
-- timeit 2 #ghc-hledger-lib hledger
-- typst-symbols 2 #ghc-texmath ghc-pandoc
-- unicode-collation 2 #ghc-pandoc pandoc-cli
-- unicode-data 2 #ghc-unicode-transforms ghc-pandoc
-- yesod-test 2 #hledger-web ghc-yesod-static
-- bimap 3 #ghc-brick ghc-copilot-theorem ghc-what4
-- binary-orphans 3 #ghc-criterion ghc-bytes ghc-hoauth2
-- boring 3 #ghc-dec ghc-constraints ghc-singleton-bool
-- hslua-core 3 #ghc-hslua ghc-hslua-module-text pandoc-cli
-- hslua-marshalling 3 #ghc-hslua ghc-hslua-module-text pandoc-cli
-- hslua-packaging 3 #ghc-hslua ghc-hslua-module-text pandoc-cli
-- integer-conversion 3 #ghc-attoparsec-iso8601 ghc-aeson ghc-attoparsec-aeson
-- splitmix 3 #ghc-random ghc-QuickCheck ghc-hledger-lib
-- text-conversions 3 #ghc-doctemplates ghc-fsnotify ghc-pandoc
-- vty-crossplatform 3 #ghc-brick hledger-ui tart
-- doclayout 5 #ghc-doctemplates ghc-hledger-lib ghc-pandoc hledger-ui pandoc-cli
-- githash 5 #ghc-optparse-simple hledger-ui hledger-web hledger stack
-- sop-core 5 #ghc-generics-sop ghc-servant-client-core ghc-servant-client ghc-servant-server ghc-servant
+- OneTuple ["ghc-aeson","ghc-hledger-lib"]
+- character-ps ["ghc-aeson","ghc-attoparsec-aeson"]
+- citeproc ["ghc-pandoc","pandoc-cli"]
+- hslua-core ["ghc-hslua","ghc-hslua-module-text","pandoc-cli"]
+- hslua-marshalling ["ghc-hslua","ghc-hslua-module-text","pandoc-cli"]
+- hslua-packaging ["ghc-hslua","ghc-hslua-module-text","pandoc-cli"]
+- hslua-typing ["ghc-hslua","pandoc-cli"]
+- libyaml ["ghc-yaml","ghc-pandoc"]
+- lucid ["ghc-hledger-lib","hledger"]
+- recv ["ghc-warp","ghc-warp-tls"]
+- skylighting-core ["ghc-skylighting","ghc-pandoc"]
+- sop-core ["ghc-generics-sop","ghc-servant","ghc-servant-server","ghc-servant-client-core","ghc-servant-client"]
+- splitmix ["ghc-random","ghc-QuickCheck","ghc-hledger-lib"]
+- timeit ["ghc-hledger-lib","hledger"]
+- typst-symbols ["ghc-texmath","ghc-pandoc"]
+- unicode-collation ["ghc-pandoc","pandoc-cli"]
+- unicode-data ["ghc-unicode-transforms","ghc-pandoc"]
+- vty-crossplatform ["ghc-brick","tart","hledger-ui"]
+- yesod-test ["ghc-yesod-static","hledger-web"]
+- bimap ["ghc-brick"] ["ghc-what4","ghc-copilot-theorem"]
+- boring ["ghc-dec","ghc-singleton-bool"] ["ghc-constraints"]
+- doclayout ["ghc-doctemplates","ghc-pandoc","pandoc-cli"] ["ghc-hledger-lib","hledger-ui"]
+- easy-file ["ghc-fast-logger"] ["ghc-simple-sendfile"]
+- fedora-krb ["fbrnch"] ["cabal-rpm"]
+- file-io ["ghc-tar"] ["git-annex"]
+- filelock ["stack"] ["Agda"]
+- ghc-lib-parser ["ormolu"] ["hlint"]
+- githash ["ghc-optparse-simple","stack"] ["hledger","hledger-web","hledger-ui"]
+- integer-conversion ["ghc-attoparsec-iso8601"] ["ghc-aeson","ghc-attoparsec-aeson"]
+- invariant ["ghc-kan-extensions"] ["Agda"]
+- open-browser ["cabal-install"] ["stack"]
+- text-conversions ["ghc-doctemplates","ghc-pandoc"] ["ghc-fsnotify"]
+- text-iso8601 ["ghc-aeson"] ["ghc-http-api-data"]
+- binary-orphans ["ghc-criterion"] ["ghc-bytes"] ["ghc-hoauth2"]
 ```
 
 Use `--limit 0` to list all bundled deps:
