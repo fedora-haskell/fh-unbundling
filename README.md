@@ -18,7 +18,7 @@ Usage: unbundling [-s|--sort] [-l|--limit NUM]
 Available options:
   -h,--help                Show this help text
   -s,--sort                Order by number of dependents
-  -l,--limit NUM           Dependent threshold
+  -l,--limit NUM           Dependent threshold (default 1)
 ```
 
 ## Current results (October 2026)
@@ -61,4 +61,11 @@ doclayout #ghc-doctemplates ghc-hledger-lib ghc-pandoc hledger-ui pandoc-cli pan
 hslua-packaging #ghc-hslua ghc-hslua-module-text pandoc-cli pandoc-cli pandoc-cli pandoc-cli
 hslua-marshalling #ghc-hslua ghc-hslua-module-text pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli
 hslua-core #ghc-hslua ghc-hslua-module-text pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli pandoc-cli
+```
+
+Use `--limit 0` to list all bundled deps:
+
+```shellsession
+$ unbundling -l0 | wc -l
+120
 ```

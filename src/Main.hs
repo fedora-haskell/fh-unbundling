@@ -15,7 +15,7 @@ main =
   "List bundled Fedora Haskell deps" $
   run
   <$> switchWith 's' "sort" "Order by number of dependents"
-  <*> optionalWith auto 'l' "limit" "NUM" "Dependent threshold" 1
+  <*> optionalWith auto 'l' "limit" "NUM" "Dependent threshold (default 1)" 1
 
 run :: Bool -> Int -> IO ()
 run order limit = do
