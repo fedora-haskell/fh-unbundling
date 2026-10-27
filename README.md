@@ -1,8 +1,8 @@
 # unbundling
 
-Lists Fedora Haskell packages that need to be unbundled
+Lists Fedora Haskell dependencies that need to be unbundled
 
-Run over checkouts of fedora haskell packages.
+Run over a checkout of fedora haskell packages.
 
 ## Usage
 
