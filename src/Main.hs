@@ -11,7 +11,7 @@ import SimpleCmdArgs
 
 main :: IO ()
 main =
-  simpleCmdArgs Nothing "unbundle"
+  simpleCmdArgs Nothing "unbundling"
   "List bundled Fedora Haskell deps" $
   run
   <$> switchWith 's' "sort" "Order by number of dependents"
