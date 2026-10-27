@@ -36,7 +36,7 @@ run order limit = do
         _ -> Nothing
 
     printBundle (d,brs) =
-      putStrLn $ stripDep d ++ ' ' : unwords (map present brs)
+      putStrLn $ "-" +-+ stripDep d +-+ show (length brs) +-+ unwords (map present brs)
 
     stripDep = dropSuffix "-devel" . dropPrefix "ghc-"
 
