@@ -19,9 +19,10 @@ main =
   run
   <$> switchWith 's' "sort" "Order by number of dependent chains"
   <*> optionalWith auto 'l' "limit" "NUM" "Dependent threshold (default 1)" 1
+  <*> optionalWith auto 'c' "chains" "NUM" "Minimal dependent chains (default 1)" 1
 
-run :: Bool -> Int -> IO ()
-run order limit = do
+run :: Bool -> Int -> Int -> IO ()
+run order limit chains = do
   specs <- lines <$> shell "ls */*.spec"
   brSpecs <- nubSort <$> concatMapM specBRs specs
   let grps = groupSort brSpecs
@@ -30,7 +31,8 @@ run order limit = do
         filter (\(_,bs) -> length bs > limit && any ((== "#BuildRequires:") . fst) bs) $ grps
   sortBundles <- mapM dependentSort bundled
   mapM_ printBundle $
-    (if order then sortOn (length . snd) else id) sortBundles
+    (if order then sortOn (length . snd) else id) $
+    filter ((>= chains) . length . snd) sortBundles
   where
     specBRs spec = do
       brs <- cmdLines "grep" ["-e", "BuildRequires:.*ghc-.*-devel", spec]

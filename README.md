@@ -11,7 +11,7 @@ Run over a checkout of fedora haskell packages.
 ```
 unbundling
 
-Usage: unbundling [-s|--sort] [-l|--limit NUM]
+Usage: unbundling [-s|--sort] [-l|--limit NUM] [-c|--chains NUM]
 
   List bundled Fedora Haskell deps
 
@@ -19,34 +19,16 @@ Available options:
   -h,--help                Show this help text
   -s,--sort                Order by number of dependent chains
   -l,--limit NUM           Dependent threshold (default 1)
+  -c,--chains NUM          Minimal dependent chains (default 1)
 ```
 
 ## Current results (October 2026)
 
 The first dependent is the current bundling package.
 
-`$ cd ~/fedora/haskell/hackage; unbundling --sort`
+`$ cd ~/fedora/haskell/hackage; unbundling -s --chains 2`
 
 ```
-- OneTuple ["ghc-aeson","ghc-hledger-lib"]
-- character-ps ["ghc-aeson","ghc-attoparsec-aeson"]
-- citeproc ["ghc-pandoc","pandoc-cli"]
-- hslua-core ["ghc-hslua","ghc-hslua-module-text","pandoc-cli"]
-- hslua-marshalling ["ghc-hslua","ghc-hslua-module-text","pandoc-cli"]
-- hslua-packaging ["ghc-hslua","ghc-hslua-module-text","pandoc-cli"]
-- hslua-typing ["ghc-hslua","pandoc-cli"]
-- libyaml ["ghc-yaml","ghc-pandoc"]
-- lucid ["ghc-hledger-lib","hledger"]
-- recv ["ghc-warp","ghc-warp-tls"]
-- skylighting-core ["ghc-skylighting","ghc-pandoc"]
-- sop-core ["ghc-generics-sop","ghc-servant","ghc-servant-server","ghc-servant-client-core","ghc-servant-client"]
-- splitmix ["ghc-random","ghc-QuickCheck","ghc-hledger-lib"]
-- timeit ["ghc-hledger-lib","hledger"]
-- typst-symbols ["ghc-texmath","ghc-pandoc"]
-- unicode-collation ["ghc-pandoc","pandoc-cli"]
-- unicode-data ["ghc-unicode-transforms","ghc-pandoc"]
-- vty-crossplatform ["ghc-brick","tart","hledger-ui"]
-- yesod-test ["ghc-yesod-static","hledger-web"]
 - bimap ["ghc-brick"] ["ghc-what4","ghc-copilot-theorem"]
 - boring ["ghc-dec","ghc-singleton-bool"] ["ghc-constraints"]
 - doclayout ["ghc-doctemplates","ghc-pandoc","pandoc-cli"] ["ghc-hledger-lib","hledger-ui"]
