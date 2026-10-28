@@ -4,7 +4,8 @@ module Main (main) where
 
 import Control.Monad.Extra (concatMapM)
 import Data.Bifunctor (second)
-import Data.List.Extra (dropPrefix, dropSuffix, groupSort, nubSort, sortOn, unsnoc)
+import Data.List.Extra (dropPrefix, dropSuffix, groupSort, intercalate,
+                        nubSort, sortOn, unsnoc)
 import Data.Maybe (mapMaybe)
 import Distribution.RPM.Build.Order (dependencySortParallel)
 import SimpleCmd (cmdLines, shell, shell_, (+-+))
@@ -45,7 +46,7 @@ run order limit chains = do
 
     printBundle (d,sbrs) =
       -- show (length sbrs) +-+
-      putStrLn $ "-" +-+ stripDep d +-+ unwords (map show sbrs)
+      putStrLn $ "-" +-+ stripDep d +-+ ":" +-+ unwords (map showDeps sbrs)
 
     stripDep = dropSuffix "-devel" . dropPrefix "ghc-"
 
@@ -60,3 +61,9 @@ run order limit chains = do
         return $ tmp </> specfile
       srted <- dependencySortParallel $ bspec : brs
       return (d, map takeBaseName <$> srted)
+
+    -- FIXME should be NonEmpty
+    showDeps [] = "[]"
+    showDeps [b] = b
+    showDeps (b:bs) =
+      b ++ ":[" ++ intercalate "," bs ++ "]"
