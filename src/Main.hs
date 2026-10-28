@@ -35,10 +35,12 @@ run order limit chains = do
     (if order then sortOn (length . snd) else id) $
     filter ((>= chains) . length . snd) sortBundles
   where
+    specBRs :: String -> IO [(String, (String, String))]
     specBRs spec = do
       brs <- cmdLines "grep" ["-e", "BuildRequires:.*ghc-.*-devel", spec]
       return $ mapMaybe (splitBR spec) brs
 
+    splitBR :: String -> String -> Maybe (String,(String,String))
     splitBR spec br =
       case unsnoc $ words br of
         Just ([bR], dep) -> Just (dep,(bR,spec))
