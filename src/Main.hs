@@ -53,7 +53,8 @@ run order limit chains = do
     takePkg = takeWhile (/= '/') . snd
 
     dependentSort (d,[]) = return (d,[])
-    dependentSort (d,(b:brs)) =
+    dependentSort (d,[b]) = return (d,[[b]])
+    dependentSort (d,b:brs) =
       withTempDir $ \tmp -> do
       bspec <- do
         let specfile = b ++ ".spec"
