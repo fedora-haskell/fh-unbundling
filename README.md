@@ -22,14 +22,15 @@ Available options:
   -c,--chains NUM          Minimal dependent chains (default 1)
 ```
 
-## Current results (October 2026)
+## Current results
 
 The first dependent is the current bundling package
 (eg bimap is bundled by ghc-brick).
 
-`$ unbundling -s --chains 2 ~/fedora/haskell/hackage`
+`$ date +%F; unbundling -s --chains 2 ~/fedora/haskell/hackage`
 
 ```
+2026-11-17
 - bimap : ghc-brick ghc-what4:[ghc-copilot-theorem]
 - boring : ghc-dec:[ghc-singleton-bool] ghc-constraints
 - doclayout : ghc-doctemplates:[ghc-pandoc,pandoc-cli] ghc-hledger-lib:[hledger-ui]
@@ -56,9 +57,10 @@ Use `--limit 0` to list all bundled deps:
 
 ## All bundlings
 
-`$ unbundling -l0 ~/fedora/haskell/hackage`
+`$ date +%F; unbundling -l0 ~/fedora/haskell/hackage`
 
 ```
+2026-11-17
 - OneTuple : ghc-aeson:[ghc-hledger-lib]
 - aeson-warning-parser : stack
 - ansi-terminal-types : ghc-ansi-terminal
