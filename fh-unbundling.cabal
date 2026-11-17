@@ -35,6 +35,7 @@ executable unbundling
 --  autogen-modules:     Paths_unbundling
   hs-source-dirs:      src
   build-depends:       base < 5,
+                       directory,
                        extra,
                        filepath,
                        rpmbuild-order,

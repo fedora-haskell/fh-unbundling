@@ -2,14 +2,16 @@
 
 module Main (main) where
 
-import Control.Monad.Extra (concatMapM)
+import Control.Monad.Extra (concatMapM, whenJust)
 import Data.Bifunctor (second)
 import Data.List.Extra (dropPrefix, dropSuffix, groupSort, intercalate,
                         nubSort, sortOn, unsnoc)
 import Data.Maybe (mapMaybe)
 import Distribution.RPM.Build.Order (dependencySortParallel)
 import SimpleCmd (cmdLines, shell, shell_, (+-+))
-import SimpleCmdArgs (auto, optionalWith, simpleCmdArgs, switchWith)
+import SimpleCmdArgs (auto, optional, optionalWith, simpleCmdArgs, strArg,
+                      switchWith)
+import System.Directory (setCurrentDirectory)
 import System.FilePath (takeBaseName, (</>))
 import System.IO.Extra (withTempDir)
 
@@ -21,9 +23,11 @@ main =
   <$> switchWith 's' "sort" "Order by number of dependent chains"
   <*> optionalWith auto 'l' "limit" "NUM" "Dependent threshold (default 1)" 1
   <*> optionalWith auto 'c' "chains" "NUM" "Minimal dependent chains (default 1)" 1
+  <*> optional (strArg "TOPDIR")
 
-run :: Bool -> Int -> Int -> IO ()
-run order limit chains = do
+run :: Bool -> Int -> Int -> Maybe FilePath -> IO ()
+run order limit chains mdir = do
+  whenJust mdir $ setCurrentDirectory
   specs <- lines <$> shell "ls */*.spec"
   brSpecs <- nubSort <$> concatMapM specBRs specs
   let grps = groupSort brSpecs
